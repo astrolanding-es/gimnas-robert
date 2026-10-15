@@ -2,7 +2,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { WhatsAppButton } from "@/components/whatsapp-button"
 import { getTranslations, type Locale } from "@/lib/i18n"
-import { Check, Star, Calendar, Euro, Users, UserCheck } from "lucide-react"
+import { Check, Star, Calendar, Euro, Users, UserCheck, Swords, ShieldCheck } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
@@ -32,6 +32,54 @@ export default function PricesPage({ params }: { params: Promise<{ locale: Local
     anual: { price: "300€", pricePerMonth: "25€", description: locale === "ca" ? "per mes" : "por mes" }
   }
 
+  // Precios KICK BOXING - BOXA (quota 2026-2027)
+  const pricesKickBoxa = {
+    primerMes: "60€",
+    mensual: "46€",
+    kickBoxaMusculacio: "55€",
+    llicenciaAnual: "80€"
+  }
+
+  const kickBoxaPlans = [
+    {
+      name: locale === "ca" ? "Primer Mes" : "Primer Mes",
+      description: locale === "ca" ? "Comença amb la matrícula i el primer mes inclosos" : "Empieza con la matrícula y el primer mes incluidos",
+      price: pricesKickBoxa.primerMes,
+      period: locale === "ca" ? "matrícula + mes inclòs" : "matrícula + mes incluido",
+      features: [
+        locale === "ca" ? "Matrícula inclosa" : "Matrícula incluida",
+        locale === "ca" ? "Classes de kick boxing i boxa" : "Clases de kick boxing y boxeo",
+        locale === "ca" ? "Grups Juniors i Seniors" : "Grupos Juniors y Seniors"
+      ],
+      highlighted: false
+    },
+    {
+      name: locale === "ca" ? "Mensual" : "Mensual",
+      description: locale === "ca" ? "Quota mensual de kick boxing i boxa" : "Cuota mensual de kick boxing y boxeo",
+      price: pricesKickBoxa.mensual,
+      period: locale === "ca" ? "per mes" : "por mes",
+      features: [
+        locale === "ca" ? "Classes de kick boxing i boxa" : "Clases de kick boxing y boxeo",
+        locale === "ca" ? "Grups Juniors i Seniors" : "Grupos Juniors y Seniors",
+        locale === "ca" ? "Tatami i sacs de colpeig" : "Tatami y sacos de golpeo"
+      ],
+      highlighted: false
+    },
+    {
+      name: locale === "ca" ? "Kick-Boxa + Musculació" : "Kick-Boxeo + Musculación",
+      description: locale === "ca" ? "Combina les classes de combat amb la sala" : "Combina las clases de combate con la sala",
+      price: pricesKickBoxa.kickBoxaMusculacio,
+      period: locale === "ca" ? "per mes" : "por mes",
+      features: [
+        locale === "ca" ? "Classes de kick boxing i boxa" : "Clases de kick boxing y boxeo",
+        locale === "ca" ? "Accés a la sala de musculació" : "Acceso a la sala de musculación",
+        locale === "ca" ? "Tècnica de combat i força en una sola quota" : "Técnica de combate y fuerza en una sola cuota"
+      ],
+      highlighted: true,
+      badge: locale === "ca" ? "Pack complet" : "Pack completo"
+    }
+  ]
+
   const mainPlans = [
     {
       name: locale === "ca" ? "Primer Mes" : "Primer Mes",
@@ -42,7 +90,7 @@ export default function PricesPage({ params }: { params: Promise<{ locale: Local
       features: [
         locale === "ca" ? "Accés complet a totes les instal·lacions" : "Acceso completo a todas las instalaciones",
         locale === "ca" ? "Sala de musculació i cardio" : "Sala de musculación y cardio",
-        locale === "ca" ? "Classes d'arts marcials" : "Clases de artes marciales",
+        locale === "ca" ? "Matrícula inclosa" : "Matrícula incluida",
         locale === "ca" ? "Vestuaris amb dutxes" : "Vestuarios con duchas"
       ],
       highlighted: false
@@ -115,11 +163,20 @@ export default function PricesPage({ params }: { params: Promise<{ locale: Local
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6">{t.prices.title}</h1>
               <p className="text-base md:text-lg lg:text-xl text-white/80 leading-relaxed">{t.prices.subtitle}</p>
-              <div className="mt-6 inline-flex items-center gap-2 bg-primary/20 px-4 py-2 rounded-full">
-                <Users className="h-5 w-5 text-primary" />
-                <span className="text-primary font-semibold">
-                  {locale === "ca" ? "Tarifes diferenciades per gènere" : "Tarifas diferenciadas por género"}
-                </span>
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+                <div className="inline-flex items-center gap-2 bg-primary/20 px-4 py-2 rounded-full">
+                  <Users className="h-5 w-5 text-primary" />
+                  <span className="text-primary font-semibold">
+                    {locale === "ca" ? "Tarifes diferenciades per gènere" : "Tarifas diferenciadas por género"}
+                  </span>
+                </div>
+                <a
+                  href="#kick-boxing"
+                  className="inline-flex items-center gap-2 border border-white/30 px-4 py-2 rounded-full font-semibold text-white hover:bg-white/10 transition-colors"
+                >
+                  <Swords className="h-5 w-5 text-primary" />
+                  {locale === "ca" ? "Tarifes Kick Boxing · Boxa" : "Tarifas Kick Boxing · Boxeo"}
+                </a>
               </div>
             </div>
           </div>
@@ -367,6 +424,96 @@ export default function PricesPage({ params }: { params: Promise<{ locale: Local
                   </CardContent>
                 </Card>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Kick Boxing - Boxa Plans */}
+        <section id="kick-boxing" className="py-20 bg-neutral text-white scroll-mt-20">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 bg-primary/20 px-4 py-1.5 rounded-full mb-4">
+                <Swords className="h-4 w-4 text-primary" />
+                <span className="text-primary text-sm font-semibold">
+                  {locale === "ca" ? "Quota 2026-2027" : "Cuota 2026-2027"}
+                </span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                {locale === "ca" ? "Kick Boxing · Boxa" : "Kick Boxing · Boxeo"}
+              </h2>
+              <p className="text-white/70">
+                {locale === "ca"
+                  ? "Classes de kick boxing i boxa al nostre tatami, soles o combinades amb la sala de musculació"
+                  : "Clases de kick boxing y boxeo en nuestro tatami, solas o combinadas con la sala de musculación"
+                }
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              {kickBoxaPlans.map((plan, index) => (
+                <Card key={index} className={`relative ${plan.highlighted ? 'ring-2 ring-primary shadow-2xl md:scale-105' : 'shadow-lg'}`}>
+                  {plan.badge && (
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                      <div className="bg-primary text-white px-4 py-1 rounded-full text-sm font-semibold flex items-center gap-1 whitespace-nowrap">
+                        <Star className="h-4 w-4" />
+                        {plan.badge}
+                      </div>
+                    </div>
+                  )}
+
+                  <CardHeader className="text-center">
+                    <CardTitle className="text-xl md:text-2xl font-bold text-neutral">{plan.name}</CardTitle>
+                    <CardDescription className="text-muted-foreground">{plan.description}</CardDescription>
+
+                    <div className="mt-4 bg-red-50 p-4 rounded-lg border border-red-200">
+                      <div className="text-3xl md:text-4xl font-bold text-red-700">{plan.price}</div>
+                      <div className="text-sm text-red-600 mt-1">{plan.period}</div>
+                    </div>
+                  </CardHeader>
+
+                  <CardContent className="flex flex-col flex-1">
+                    <ul className="space-y-3 mb-6">
+                      {plan.features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-start gap-3">
+                          <Check className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                          <span className="text-muted-foreground text-sm">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <Button
+                      asChild
+                      className={`w-full mt-auto ${plan.highlighted ? 'bg-primary hover:bg-primary/90' : 'bg-secondary hover:bg-secondary/90 text-neutral'}`}
+                    >
+                      <Link href={`/${locale}/${locale === "ca" ? "contacte" : "contacto"}`}>
+                        {locale === "ca" ? "Contractar" : "Contratar"}
+                      </Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            {/* Llicència i assegurança obligatòria */}
+            <div className="max-w-4xl mx-auto mt-12 bg-white/5 border border-white/15 border-l-4 border-l-primary rounded-lg p-6 flex flex-col sm:flex-row sm:items-center gap-4">
+              <div className="bg-primary/20 p-3 rounded-lg self-start sm:self-center">
+                <ShieldCheck className="h-6 w-6 text-primary" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-semibold">
+                  {locale === "ca" ? "Llicència i assegurança anual obligatòria" : "Licencia y seguro anual obligatorio"}
+                </h3>
+                <p className="text-sm text-white/70 mt-1">
+                  {locale === "ca"
+                    ? "Imprescindible per a tots els alumnes de kick boxing i boxa. Es paga un cop l'any, a part de la quota."
+                    : "Imprescindible para todos los alumnos de kick boxing y boxeo. Se paga una vez al año, aparte de la cuota."
+                  }
+                </p>
+              </div>
+              <div className="sm:text-right">
+                <div className="text-3xl font-bold text-primary">{pricesKickBoxa.llicenciaAnual}</div>
+                <div className="text-xs text-white/60">{locale === "ca" ? "per any" : "por año"}</div>
+              </div>
             </div>
           </div>
         </section>
