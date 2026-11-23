@@ -137,9 +137,20 @@ export function Footer({ locale, translations }: FooterProps) {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-white/60 text-sm">
-              © {currentYear} Gimnàs Robert. {t.rights}
-            </p>
+            <div className="flex flex-col items-center gap-1 text-white/60 text-sm md:flex-row md:gap-4">
+              <p>
+                © {currentYear} Gimnàs Robert. {t.rights}
+              </p>
+              <p>
+                {locale === "ca" ? "Disseny web" : "Diseño web"}:{" "}
+                <a
+                  href="https://www.astrolanding.es/proyectos/gimnas-robert"
+                  className="underline underline-offset-2 hover:text-primary transition-colors"
+                >
+                  AstroLanding
+                </a>
+              </p>
+            </div>
             <div className="flex gap-4">
               <a href="#" className="text-white/60 hover:text-primary transition-colors" aria-label="Instagram">
                 <Instagram className="h-5 w-5" />
