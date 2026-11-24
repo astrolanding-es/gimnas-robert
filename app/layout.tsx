@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import { ContactTracking } from "@/components/contact-tracking"
 import "./globals.css"
 
 const inter = Inter({
@@ -49,6 +50,7 @@ export default function RootLayout({
       <body className="overflow-x-hidden">
         {children}
         <Analytics />
+        <ContactTracking />
       </body>
     </html>
   )
